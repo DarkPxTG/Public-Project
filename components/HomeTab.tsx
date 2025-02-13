@@ -8,7 +8,7 @@ import ArrowRight from '@/icons/ArrowRight'
 import { sparkles } from '@/images'
 import Image from 'next/image'
 import { useEffect } from 'react'
-import Link from 'next/link' // برای لینک‌های داخلی از این استفاده می‌کنیم
+import Link from 'next/link'
 
 const HomeTab = () => {
     useEffect(() => {
@@ -66,23 +66,40 @@ const HomeTab = () => {
                     left: -10px;
                 }
 
-                /* اضافه کردن این استایل برای ثابت نگه داشتن تسک‌ها */
-                .tasks-container {
+                /* ثابت نگه داشتن متن بالای صفحه */
+                .header-text {
                     position: sticky;
-                    top: 80px;  /* فاصله از بالای صفحه */
+                    top: 20px;  /* فاصله از بالای صفحه */
+                    z-index: 20;
+                }
+
+                /* ثابت نگه داشتن دکمه‌ها در پایین صفحه */
+                .task-buttons {
+                    position: fixed;
+                    bottom: 20px; /* فاصله از پایین صفحه */
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 90%;
                     z-index: 10;
                 }
 
+                /* برای کانکت ولت که ثابت نباشد */
+                .connect-wallet {
+                    position: relative; /* بدون position ثابت */
+                    top: 0;
+                    z-index: 20; /* از سایر بخش‌ها جلوتر نباشد */
+                }
+
                 /* فاصله بیشتر بین دکمه‌ها و تسک‌ها */
-                .task-buttons {
-                    margin-bottom: 30px;
+                .task-buttons button {
+                    margin-bottom: 20px;
                 }
             `}</style>
 
             <div className="relative overflow-hidden bg-gradient-to-b from-[#2a004e] to-[#000000] min-h-screen">
                 {/* Connect Wallet Button */}
-                <div className="task-buttons">
-                    <button className="w-full flex justify-center mt-8">
+                <div className="connect-wallet mt-8 w-full flex justify-center">
+                    <button className="w-full flex justify-center">
                         <div className="bg-[#3c3ce7] text-white px-3 py-0.5 rounded-full flex items-center gap-2">
                             <Wallet className="w-5 h-5" />
                             <span>Connect wallet</span>
@@ -91,7 +108,7 @@ const HomeTab = () => {
                 </div>
 
                 {/* PAWS Balance */}
-                <div className="flex flex-col items-center mt-8">
+                <div className="header-text flex flex-col items-center mt-8">
                     <div className="image-container mb-4">
                         <Image
                             src="/images/pixelart_Dark.png"
